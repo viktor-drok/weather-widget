@@ -26,6 +26,8 @@ function sendRequest() {
                 temperatureOutput.innerText = 'Sunny :)';
                 cityOutput.innerText = 'Enter correct city name';
             } else {
+                temperatureOutput.style.fontSize = '80px';
+                cityOutput.style.fontSize = '60px';
                 temperatureOutput.innerText = `${(data.main.temp).toFixed() - 273}°C`;
                 cityOutput.innerText = data.name;
             }
