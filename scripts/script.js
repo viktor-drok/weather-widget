@@ -20,8 +20,15 @@ function sendRequest() {
     return fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            temperatureOutput.innerText = `${(data.main.temp).toFixed() - 273}°C`;
-            cityOutput.innerText = data.name;
+            if (data.cod == '404') {
+                temperatureOutput.style.fontSize = '40px';
+                cityOutput.style.fontSize = '40px';
+                temperatureOutput.innerText = 'Sunny :)';
+                cityOutput.innerText = 'Enter correct city name';
+            } else {
+                temperatureOutput.innerText = `${(data.main.temp).toFixed() - 273}°C`;
+                cityOutput.innerText = data.name;
+            }
         });
 }
 
