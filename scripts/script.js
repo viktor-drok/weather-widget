@@ -47,6 +47,7 @@ function getLatLon() {
         coord.splice(0, 2, lon, lat);
     });
 }
+
 let map;
 
 function renderMap() {
