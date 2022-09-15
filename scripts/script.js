@@ -3,15 +3,6 @@ const cityOutput = document.querySelector('.city');
 const cityInput = document.querySelector('input');
 
 let temperature = 0;
-// let city = '';
-
-// const temperatureC = TK - 273
-
-// async function sendRequest() {
-//     const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Lviv&APPID=2189a914e12606ce4c9859c83645d40e');
-//     const data = await response.json();
-//     return console.log(data);
-// }
 
 function sendRequest() {
     let city = cityInput.value;
@@ -35,5 +26,46 @@ function sendRequest() {
 }
 
 onkeydown = (evt) => {
-    if (evt.key == 'Enter' && !(city = '')) sendRequest();
-}; 
+    if (evt.key == 'Enter' && !(city = '')) {
+        sendRequest();
+        getLatLon();
+        renderMap();
+    };
+};
+
+getLatLon();
+
+
+
+const coord = [30.5167, 50.4333];
+
+function getLatLon() {
+    let city = cityInput.value;
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=2189a914e12606ce4c9859c83645d40e`;
+
+    return fetch(url).then((response => response.json())).then((data) => {
+        lon = data.coord.lon;
+        lat = data.coord.lat;
+        console.log(lat);
+        console.log(lon);
+        console.log(coord);
+        coord.splice(0, 2, lon, lat);
+    });
+}
+let map;
+
+function renderMap() {
+    getLatLon().then(window.initMap = initMap);
+}
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: coord[1], lng: coord[0] },
+        zoom: 8,
+    });
+}
+
+
+
+// window.initMap = initMap;
