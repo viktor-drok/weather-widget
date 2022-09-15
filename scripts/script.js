@@ -28,10 +28,13 @@ function sendRequest() {
 onkeydown = (evt) => {
     if (evt.key == 'Enter' && !(city = '')) {
         sendRequest();
-        getLatLon();
         renderMap();
     };
 };
+
+function renderMap() {
+    getLatLon().then(window.initMap = initMap);
+}
 
 const coord = [30.5167, 50.4333];
 
@@ -49,10 +52,6 @@ function getLatLon() {
 }
 
 let map;
-
-function renderMap() {
-    getLatLon().then(window.initMap = initMap);
-}
 
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
