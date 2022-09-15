@@ -33,10 +33,6 @@ onkeydown = (evt) => {
     };
 };
 
-getLatLon();
-
-
-
 const coord = [30.5167, 50.4333];
 
 function getLatLon() {
@@ -47,9 +43,7 @@ function getLatLon() {
     return fetch(url).then((response => response.json())).then((data) => {
         lon = data.coord.lon;
         lat = data.coord.lat;
-        console.log(lat);
-        console.log(lon);
-        console.log(coord);
+
         coord.splice(0, 2, lon, lat);
     });
 }
@@ -62,10 +56,6 @@ function renderMap() {
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: coord[1], lng: coord[0] },
-        zoom: 8,
+        zoom: 10,
     });
 }
-
-
-
-// window.initMap = initMap;
