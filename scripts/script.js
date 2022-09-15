@@ -25,6 +25,26 @@ function sendRequest() {
         });
 }
 
+// async function sendRequest() {
+//     let city = cityInput.value;
+//     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=2189a914e12606ce4c9859c83645d40e`;
+
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     if (data.cod == '404') {
+//         temperatureOutput.style.fontSize = '40px';
+//         cityOutput.style.fontSize = '40px';
+//         temperatureOutput.innerText = 'Sunny :)';
+//         cityOutput.innerText = 'Enter correct city name';
+//     } else {
+//         temperatureOutput.style.fontSize = '80px';
+//         cityOutput.style.fontSize = '60px';
+//         temperatureOutput.innerText = `${(data.main.temp).toFixed() - 273}°C`;
+//         cityOutput.innerText = data.name;
+//     }
+// }
+
+
 onkeydown = (evt) => {
     if (evt.key == 'Enter' && !(city = '')) {
         sendRequest();
@@ -44,8 +64,8 @@ function getLatLon() {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=2189a914e12606ce4c9859c83645d40e`;
 
     return fetch(url).then((response => response.json())).then((data) => {
-        lon = data.coord.lon;
-        lat = data.coord.lat;
+        let lon = data.coord.lon;
+        let lat = data.coord.lat;
 
         coord.splice(0, 2, lon, lat);
     });
